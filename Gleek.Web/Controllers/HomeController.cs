@@ -5,15 +5,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Gleek.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Gleek.Web.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IConfiguration Configure;
+        public HomeController(IConfiguration configure)
+        {
+            this.Configure = configure;
+        }
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
         {
             return View();
         }
+
+        public IActionResult Index()
+        {
+            //var person = Configure[]
+            return View();
+        }
+
+        //public IActionResult GoToAdmin()
+        //{
+        //    return RedirectToAction("Index", "Dashboard", new { area="Admin"});
+        //}
 
         public IActionResult Privacy()
         {
